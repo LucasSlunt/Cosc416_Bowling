@@ -5,8 +5,9 @@ public class BallController : MonoBehaviour
 {
     public float force = 30f;
     public InputManager inputManager;
-
     public Rigidbody ballRB;
+
+    private bool isBallLaunched = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,6 +23,8 @@ public class BallController : MonoBehaviour
 
     private void LaunchBall()
     {
+        if (isBallLaunched) return;
+        isBallLaunched = true;
         ballRB.AddForce(transform.forward * force, ForceMode.Impulse);
     }
 }
