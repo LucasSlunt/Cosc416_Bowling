@@ -7,6 +7,7 @@ public class BallController : MonoBehaviour
     public Transform ballAnchor;
     public InputManager inputManager;
     public Rigidbody ballRB;
+    public Transform launchIndicator;
 
     private bool isBallLaunched = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,11 +22,6 @@ public class BallController : MonoBehaviour
         //kinematic means "control this with code, not physics"
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void LaunchBall()
     {
@@ -34,5 +30,6 @@ public class BallController : MonoBehaviour
         transform.parent = null;
         ballRB.isKinematic = false;
         ballRB.AddForce(transform.forward * force, ForceMode.Impulse);
+        launchIndicator.gameObject.SetActive(false);
     }
 }
