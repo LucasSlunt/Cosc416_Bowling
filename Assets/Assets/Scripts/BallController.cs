@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class BallController : MonoBehaviour
 {
     public float force = 30f;
+    public Transform ballAnchor;
     public InputManager inputManager;
     public Rigidbody ballRB;
 
@@ -13,6 +14,11 @@ public class BallController : MonoBehaviour
     {
         ballRB = GetComponent<Rigidbody>();
         inputManager.OnSpacePressed.AddListener(LaunchBall);
+
+        transform.parent = ballAnchor;
+        transform.localPosition = Vector3.zero;
+        ballRB.isKinematic = true;
+        //kinematic means "control this with code, not physics"
     }
 
     // Update is called once per frame
@@ -25,6 +31,8 @@ public class BallController : MonoBehaviour
     {
         if (isBallLaunched) return;
         isBallLaunched = true;
+        transform.parent = null;
+        ballRB.isKinematic = false;
         ballRB.AddForce(transform.forward * force, ForceMode.Impulse);
     }
 }
