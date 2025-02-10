@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
 
     public UnityEvent OnSpacePressed = new UnityEvent();
+    public UnityEvent OnResetPressed = new UnityEvent();
     public UnityEvent<Vector2> OnMove = new UnityEvent<Vector2>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -26,5 +27,10 @@ public class InputManager : MonoBehaviour
             input += Vector2.right;
         }
         OnMove?.Invoke(input);
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            OnResetPressed?.Invoke();
+        }
     }
 }
